@@ -16,23 +16,27 @@ def main():
         
         for choice in current_q:
             print(current_q.index(choice)+1, choice.title())
-        a = input("Please choose one: ")
+        a = input("Please choose an answer: ")
         
         try:
             if int(a) <= len(current_q) and int(a) > 0:
                 point += int(a)
-                print(point)
+                print()
+            else:
+                questions.append(q)
         except:
-            print("Invalid input. Please select from the list above")
+            print("Invalid input. Please select an answer")
             questions.append(q)
 
     msg = "Your car is: "
-    if point >= 13:
+    if point >= 18:
         msg += cars[0]
-    elif point >= 8:
+    elif point >= 14:
         msg += cars[1]
-    elif point >= 5:
+    elif point >= 10:
         msg += cars[2]
+    elif point >= 6:
+        msg += cars[3]
     else:
         msg += cars[-1]
 
