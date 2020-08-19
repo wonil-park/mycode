@@ -1,9 +1,12 @@
+#!/usr/bin/env python3
 from cheatdice import Player
 from cheatdice import Cheat_Swapper
 from cheatdice import Cheat_Loaded_Dice
+from cheatdice import Cheat_Ultimate
 
 cheater1 = Cheat_Swapper()
 cheater2 = Cheat_Loaded_Dice()
+cheater3 = Cheat_Ultimate()
 
 cheater1.roll()
 cheater2.roll()
@@ -23,9 +26,3 @@ elif sum(cheater1.get_dice()) > sum(cheater2.get_dice()):
 else:
   print("Cheater 2 wins!")
 
-
-class Cheat_Ultimate(Player):
-  def cheat(self):
-    for roll in self.dice:
-      if roll < 6:
-        roll = 6

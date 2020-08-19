@@ -18,11 +18,11 @@ conc = "Then don't worry."
 def on_press(key):
     try:
         k = key.char
-        # if quit.__contains__(k):
-        #     sys.exit(0)
+        if quit.__contains__(k):
+            # TODO: Only raises an exception. Need to find a better way to terminate
+            sys.exit(0)
     except:
-        print('error')
-
+        print('Godd bye')
 
 def main():
     """main function"""
@@ -47,7 +47,7 @@ def input_handler(question):
         elif no.__contains__(answer):
             print(conc)
             answered = True
-        elif quit.__contains__(answer):
+        elif answer.__contains__('q'):
             sys.exit(0)
 
 main()

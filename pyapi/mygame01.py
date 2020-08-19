@@ -7,6 +7,7 @@ def showInstructions():
         Commands:
           go/move [direction]
           get [item] / get all
+          use [item]
         ''')
 
 
@@ -22,7 +23,14 @@ def showStatus():
 commands = {
     'go': ['go', 'move', 'travel', 'walk'],
     'get': ['take', 'pick up', 'get'],
-    'use': ['use', 'eat', 'drink']
+    'use': ['use', 'eat', 'drink'],
+    'attack': ['attack', 'punch', 'kill', 'kick']
+}
+
+player = {
+    'hp': 100,
+    'power': 50,
+    'weapon': ''
 }
 
 inventory = []
@@ -32,12 +40,12 @@ rooms = {
     'Hall': {
         'south': 'Kitchen',
         'east': 'Dining Room',
-        'item': ['key', 'leaflet'],
+        'item': ['key', 'sword'],
     },
 
     'Kitchen': {
         'north': 'Hall',
-        'item': ['monster'],
+        'item': ['monster', 'lunch'],
     },
     'Dining Room': {
         'west': 'Hall',
@@ -85,7 +93,7 @@ while True:
                 # display a helpful message
                 print(move[1] + ' got!')
                 # delete the item from the room
-                del rooms[currentRoom]['item']
+                del rooms[currentRoom]['item'][rooms[currentRoom]['item'].index(move[1])]
             elif move[1] == 'all':
                 for i, item in enumerate(rooms[currentRoom]['item']):
                     inventory.append(item)
@@ -94,9 +102,21 @@ while True:
             # tell them they can't get it
             print('Can\'t get ' + move[1] + '!')
 
+    if commands['use'].__contains__(move[0]):
+        if move[1] in inventory:
+
+
     if 'item' in rooms[currentRoom] and 'monster' in rooms[currentRoom]['item']:
-        print('A monster has got you... GAME OVER!')
-        break
+        if 'sword' not in inventory:
+            print('A monster has got you... GAME OVER!')
+            break
+        else:
+            print(f'Oh no! You\'ve run into a monster in {currentRoom}.')
+            # TODO: need to implement battle mode
+            move = ''
+            while move == '':
+                move = input('>')
+
 
     if currentRoom == 'Garden' and 'key' in inventory and 'potion' in inventory:
         print('You escaped the house with the ultra rare key and magic potion... YOU WIN!')
